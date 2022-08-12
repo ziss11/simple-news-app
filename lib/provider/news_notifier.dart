@@ -18,7 +18,7 @@ class NewsNotifier extends ChangeNotifier {
   String get message => _message;
   ResultState get state => _state;
 
-  Future<dynamic> _fetchAllArticles() async {
+  Future _fetchAllArticles() async {
     _state = ResultState.loading;
     notifyListeners();
 
@@ -29,18 +29,18 @@ class NewsNotifier extends ChangeNotifier {
         _state = ResultState.hasData;
         notifyListeners();
 
-        return _articles = result;
+        _articles = result;
       } else {
         _state = ResultState.none;
         notifyListeners();
 
-        return _message = 'Empty Data';
+        _message = 'Empty Data';
       }
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
 
-      return _message = e.toString();
+      _message = e.toString();
     }
   }
 }
